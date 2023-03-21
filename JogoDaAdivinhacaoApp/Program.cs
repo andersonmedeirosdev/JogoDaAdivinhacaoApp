@@ -18,7 +18,7 @@
 
             Random aleatorio = new Random();
 
-            int numAleatorio = aleatorio.Next(1, 20);
+            int numAleatorio = aleatorio.Next(1, 21);
 
             int chances;
 
@@ -42,7 +42,7 @@
                     return;
             }
 
-            for (int i = 0; i <= chances; i++)
+            for (int i = 1; i <= chances; i++)
             {
                 Console.WriteLine("Qual é o seu chute?");
                 numeroChutado = Convert.ToInt32(Console.ReadLine());
