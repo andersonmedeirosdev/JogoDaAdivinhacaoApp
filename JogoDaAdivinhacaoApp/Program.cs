@@ -2,50 +2,28 @@
 {
     internal class Program
     {
+
+        static int dificuldade;
+        static int chances;
+        static int numeroChutado;
+        static int numAleatorio;
+        static double pontuacaoTotal = 1000, calculoPontuacao;
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Bem vindo ao Jogo da Adivinhação!!!");
-            Console.WriteLine();
 
-            Console.WriteLine("Escolha o nível de dificuldade:");
-            Console.WriteLine();
+            GerarMenu();
 
-            Console.WriteLine("[1] Fácil [2] Médio [3] Difícil");
-            int dificuldade = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine();
+            GerarNumeroAleatorio();
 
-            int numeroChutado;
+            GerarDificuldade();
 
-            Random aleatorio = new Random();
-
-            int numAleatorio = aleatorio.Next(1, 21);
-
-            int chances;
-
-            int pontuacaoTotal = 1000;
-
-            int calculoPontuacao;
-
-            switch (dificuldade) {
-                case 1:
-                    chances = 15;
-                    break;
-
-                case 2:
-                    chances = 10;
-                    break;
-                case 3:
-                    chances = 5;
-                    break;
-                default:
-                    Console.WriteLine("Digite um número entre 1 e 3.");
-                    return;
-            }
 
             for (int i = 1; i <= chances; i++)
             {
-                Console.WriteLine("Qual é o seu chute?");
-                numeroChutado = Convert.ToInt32(Console.ReadLine());
+                ReceberPalpite();
+                //Console.WriteLine("Qual é o seu chute?");
+                //numeroChutado = Convert.ToInt32(Console.ReadLine());
 
                 if (numeroChutado != numAleatorio)
                 {
@@ -62,13 +40,64 @@
                     Console.WriteLine("Parabéns, você acertou.");
                     break;
                 }
-                calculoPontuacao = Math.Abs(numeroChutado - numAleatorio) / 2;
-                int pontuacaoAtual = pontuacaoTotal - calculoPontuacao;
-                Console.WriteLine(pontuacaoAtual);
+
+                GerarCalculoPontuacao();
                 Console.WriteLine("Tentativa número " + i);
                 Console.WriteLine();
             }
 
+            static void GerarMenu()
+            {
+                Console.WriteLine("Bem vindo ao Jogo da Adivinhação!!!");
+                Console.WriteLine();
+
+                Console.WriteLine("Escolha o nível de dificuldade:");
+                Console.WriteLine();
+
+                Console.WriteLine("[1] Fácil [2] Médio [3] Difícil");
+                dificuldade = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+            }
+
+            static void GerarDificuldade()
+            {
+                switch (dificuldade)
+                {
+                    case 1:
+                        chances = 15;
+                        break;
+
+                    case 2:
+                        chances = 10;
+                        break;
+                    case 3:
+                        chances = 5;
+                        break;
+                    default:
+                        Console.WriteLine("Digite um número entre 1 e 3.");
+                        return;
+                }
+            }
+
+            static void GerarNumeroAleatorio()
+            {
+                Random aleatorio = new Random();
+
+                numAleatorio = aleatorio.Next(1, 21);
+            }
+
+            static void GerarCalculoPontuacao()
+            {
+                calculoPontuacao = Math.Abs((numeroChutado - numAleatorio) / 2);
+                double pontuacaoAtual = pontuacaoTotal - calculoPontuacao;
+                Console.WriteLine(pontuacaoAtual);
+            }
+
+            static void ReceberPalpite()
+            {
+                Console.WriteLine("Qual é o seu chute?");
+                numeroChutado = Convert.ToInt32(Console.ReadLine());
+            }
         }
     }
 }
