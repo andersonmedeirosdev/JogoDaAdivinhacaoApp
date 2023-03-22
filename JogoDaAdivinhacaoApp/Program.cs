@@ -22,8 +22,6 @@
             for (int i = 1; i <= chances; i++)
             {
                 ReceberPalpite();
-                //Console.WriteLine("Qual é o seu chute?");
-                //numeroChutado = Convert.ToInt32(Console.ReadLine());
 
                 if (numeroChutado != numAleatorio)
                 {
@@ -38,6 +36,14 @@
                 } else
                 {
                     Console.WriteLine("Parabéns, você acertou.");
+                    if (i == 1)
+                    {
+                        Console.WriteLine("Sua pontuação final foi: " + pontuacaoTotal);
+                    }
+                    else
+                    {
+                        GerarCalculoPontuacao();
+                    }
                     break;
                 }
 
@@ -90,7 +96,7 @@
             {
                 calculoPontuacao = Math.Abs((numeroChutado - numAleatorio) / 2);
                 double pontuacaoAtual = pontuacaoTotal - calculoPontuacao;
-                Console.WriteLine(pontuacaoAtual);
+                Console.WriteLine("Sua pontuação final foi: " + pontuacaoAtual);
             }
 
             static void ReceberPalpite()
